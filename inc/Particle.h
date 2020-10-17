@@ -10,10 +10,11 @@ class Particle{
         //En primer lugar, definimos los metodos constructores y destructores
         Particle();
         ~Particle();
-        Particle(double x0, double y0, double vx0, double vy0, double m, double r);
+        Particle(double x0, double y0, double vx0, double vy0, double m0, double r0);
         
         //Metodos para asignar los limites del recipiente
-        double asignarLimites(double anchoMin_, double anchoMax_, double altoMin_, double altoMax_);
+        void asignarLimitesPared(double anchoMin_, double anchoMax_, double altoMin_, double altoMax_);
+        void revisarLimitesPared();
 
         //Metodos para obtener las variables masa y radio
         double get_m();
@@ -42,6 +43,15 @@ class Particle{
         //Definimos el recipiente en que está la particula
         double anchoMin, anchoMax;
         double altoMin, altoMax;
+
+        //Magnitud Velocidad al cuadrado
+        double v;
+
+        //Momentos en x e y
+        double px, py;
+
+        //Energias cineticas y potencias
+        double E_k, E_v;
 };
 
 #endif
