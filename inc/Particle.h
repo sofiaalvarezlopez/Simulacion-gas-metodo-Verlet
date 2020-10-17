@@ -16,22 +16,35 @@ class Particle{
         void asignarLimitesPared(double anchoMin_, double anchoMax_, double altoMin_, double altoMax_);
         void revisarLimitesPared();
 
-        //Metodos para obtener las variables masa y radio
+        //Getters
         double get_m();
         double get_r();
+        double get_x();
+        double get_y();
+        double get_vx();
+        double get_vy();
+        double get_px();
+        double get_py();
 
         //Metodo que obtiene la fuerza de una particula
-        double guerzaParticula(Particle &p1, Particle &p2);
+        void fuerzaParticula(Particle &p1, Particle &p2);
+        void fuerza0();
         double distancia(double x1, double y1, double x2, double y2);
+
+
+        //Metodo para mover la particula
+        void moverParticula(double tiempo, double deltaTiempo, int iteracion);
+
     private:
         //Definimos las variables de la particula
-        double m;
-        double r;
         double x;
         double y;
-        double t;
         double vx;
         double vy;
+        double m;
+        double r;
+
+        double t;
 
         //Constante k de la fuerza
         const double k = 100;
