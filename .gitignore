@@ -1,3 +1,5 @@
 .DS_Store
 /obj
 Simulacion
+*.txt
+.vscode/settings.json

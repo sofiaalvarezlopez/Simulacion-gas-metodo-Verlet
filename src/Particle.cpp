@@ -82,20 +82,20 @@ void Particle::fuerzaParticula(Particle &p1, Particle &p2){
     double verificacion = p1.r + p2.r - dist;
 
     if(verificacion > 0.0){
-        double fuerzaNormal = k*pow(dist,3);
-        cout<<"se chocaron"<<endl;
+        double fuerzaNormal = k*pow(verificacion,3);
+        //cout<<"se chocaron"<<endl;
         //Calculamos las componentes x e y del vector fuerza
-        p1.Fx = -fuerzaNormal*(p2.x - p1.x)/dist;
-        p1.Fy = -fuerzaNormal*(p2.y - p1.y)/dist;
+        p1.Fx -= fuerzaNormal*(p2.x - p1.x)/dist;
+        p1.Fy -= fuerzaNormal*(p2.y - p1.y)/dist;
 
-        p1.ax = p1.Fx/p1.m;
-        p1.ay = p1.Fy/p1.m;
+        p1.ax += p1.Fx/p1.m;
+        p1.ay += p1.Fy/p1.m;
 
-        p2.Fx = fuerzaNormal*(p2.x - p1.x)/dist;
-        p2.Fy = fuerzaNormal*(p2.y - p1.y)/dist;
+        p2.Fx += fuerzaNormal*(p2.x - p1.x)/dist;
+        p2.Fy += fuerzaNormal*(p2.y - p1.y)/dist;
 
-        p2.ax = p2.Fx/p2.m;
-        p2.ay = p2.Fy/p2.m;
+        p2.ax += p2.Fx/p2.m;
+        p2.ay += p2.Fy/p2.m;
     }
 }
 
@@ -135,3 +135,5 @@ void Particle::moverParticula(double tiempo, double deltaTiempo, int iteracion){
 Particle::~Particle(){
 
 }
+
+//Conclusion ¿el momento se crea? 
