@@ -111,7 +111,7 @@ void Particle::fuerzaParticula(Particle &p1, Particle &p2){
         p2.ax += p2.Fx/p2.m;
         p2.ay += p2.Fy/p2.m;
 
-        E_v = - k * pow(verificacion, 4)/4;
+        E_v =  k * pow(verificacion, 4)/4;
     }
 }
 
