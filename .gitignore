@@ -4,3 +4,5 @@ Simulacion
 *.txt
 .vscode/settings.json
 /data/
+/DataAnalisis/
+*.ipynb
