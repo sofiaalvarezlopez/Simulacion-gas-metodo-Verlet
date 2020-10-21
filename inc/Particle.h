@@ -30,6 +30,8 @@ class Particle{
         double get_vy();
         double get_px();
         double get_py();
+        double get_Ek();
+        double get_Ev();
 
         //Metodo que obtiene la fuerza de una particula
         void fuerzaParticula(Particle &p1, Particle &p2);
@@ -38,7 +40,7 @@ class Particle{
 
 
         //Metodo para mover la particula
-        void moverParticula(double tiempo, double deltaTiempo, int iteracion);
+        void moverParticula(double deltaTiempo, int iteracion);
 
         //Cerrar archivo
         void cerrarArchivo();
