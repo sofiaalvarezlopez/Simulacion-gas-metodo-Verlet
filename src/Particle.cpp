@@ -1,9 +1,23 @@
 #include "../inc/Particle.h"
+#include <string>
+#include <iostream>
+#include <vector>
+#include <random>
+#include <fstream>
+
 using namespace  std;
 
 //Definimos el constructor
-Particle::Particle(double x0, double y0, double vx0, double vy0, double m0, double r0):
-x(x0), y(y0), vx(vx0), vy(vy0), m(m0), r(r0){
+Particle::Particle(double x0, double y0, double vx0, double vy0, double m0, double r0, int ID0, string path):
+x(x0), y(y0), vx(vx0), vy(vy0), m(m0), r(r0), ID(ID0){
+
+    //Abrimos el archivo
+
+    string filename = path;
+    filename.append("/Particula" + to_string(ID) + ".dat");
+    archivo.open(filename);
+
+    archivo << "x,y,vx,vy,v,ax,ay,px,py,Fx,Fy,Ek,Ev,m,r"<<endl;
 
     //Definimos aceleraciones iniciales
     Fx = 0.0;
@@ -96,6 +110,8 @@ void Particle::fuerzaParticula(Particle &p1, Particle &p2){
 
         p2.ax += p2.Fx/p2.m;
         p2.ay += p2.Fy/p2.m;
+
+        E_v = - k * pow(verificacion, 4)/4;
     }
 }
 
@@ -126,10 +142,18 @@ void Particle::moverParticula(double tiempo, double deltaTiempo, int iteracion){
 
     px=m*vx;
     py=m*vy;
+    
+    archivo << x << ',' << y << ',' << vx << ',' << vy << ',' << sqrt(v) << ',' << ax << ',' << ay << ',' 
+    << px << ',' << py << ',' << Fx << ',' << Fy << ',' << E_k << ',' << E_v << ',' << m << ',' << r << endl;
 
     fuerza0();
 }
 
+
+//Cerrar outstream
+void Particle::cerrarArchivo(){
+    archivo.close();
+}
 
 //Destructor
 Particle::~Particle(){

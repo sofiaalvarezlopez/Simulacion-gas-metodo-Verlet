@@ -4,13 +4,18 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <fstream>
+
+#include <string>
+
+using namespace  std;
 
 class Particle{
     public:
         //En primer lugar, definimos los metodos constructores y destructores
         Particle();
         ~Particle();
-        Particle(double x0, double y0, double vx0, double vy0, double m0, double r0);
+        Particle(double x0, double y0, double vx0, double vy0, double m0, double r0, int ID0, string path);
         
         //Metodos para asignar los limites del recipiente
         void asignarLimitesPared(double anchoMin_, double anchoMax_, double altoMin_, double altoMax_);
@@ -35,6 +40,9 @@ class Particle{
         //Metodo para mover la particula
         void moverParticula(double tiempo, double deltaTiempo, int iteracion);
 
+        //Cerrar archivo
+        void cerrarArchivo();
+
     private:
         //Definimos las variables de la particula
         double x;
@@ -43,6 +51,12 @@ class Particle{
         double vy;
         double m;
         double r;
+
+        //Atributo de archivo
+        ofstream archivo;
+
+        //Numero de identificacion de la particula
+        int ID;
 
         double t;
 

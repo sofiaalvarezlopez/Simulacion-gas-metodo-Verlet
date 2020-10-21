@@ -3,3 +3,4 @@
 Simulacion
 *.txt
 .vscode/settings.json
+/data/

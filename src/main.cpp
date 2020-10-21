@@ -6,26 +6,37 @@
 #include <unistd.h> 
 #include <stdio.h> 
 #include <stdlib.h> 
+#include <chrono>
+#include <ctime>  
+#include <string>
+#include <cstdio>
 
 using namespace  std;
 
 int main(int argc, char *argv[]){
 
-    ofstream outfile;
-    mkdir("./data", 0777);
-    outfile.open("./data/momento.dat");
-    outfile << "px,py" << endl;
+    auto start = std::chrono::system_clock::now();
+
+    std::time_t startTime = std::chrono::system_clock::to_time_t(start);
+
+
+    string filename = "data/";
+    filename.append(ctime(&startTime));
+    filename.erase(filename.find_last_not_of(" \n\r\t") + 1);
+
+    //cout << filename.c_str() << endl;
+
+    mkdir("data", 0777);
+    mkdir(filename.c_str(), 0777);
 
     int numParticulas = std::stoi(argv[1]);
 
-    //cout<<"Este es el num particulas "<< numParticulas<<endl;
-    //cout<<"Este es el num arg "<< *argv[1] <<endl;
     Particle *particulas[numParticulas];
 
     if(numParticulas == 2){
-        Particle *particula1 = new Particle(-10.0, 4.0, 40.0, 0.0, 10.0, 5.0);
+        Particle *particula1 = new Particle(-10.0, 4.0, 40.0, 0.0, 10.0, 5.0, 1, filename);
         particula1->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
-        Particle *particula2 = new Particle(0.0, 0.0, 0.0, 0.0, 10.0, 5.0);
+        Particle *particula2 = new Particle(0.0, 0.0, 0.0, 0.0, 10.0, 5.0, 2, filename);
         particula2->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
 //        Particle *particula3 = new Particle(0.0, 10.0, -1.0, 2.0, 10.0, 5.0);
 //        particula3->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
@@ -40,7 +51,7 @@ int main(int argc, char *argv[]){
         double limiteV = 100.0;
         srand48(286+177);
         for(int i = 0; i<numParticulas; i++){
-            Particle *particulai = new Particle(limiteP*(drand48()-0.5), limiteP*(drand48()-0.5), limiteV*(drand48()-0.5), limiteV*(drand48()-0.5), masa, radio);
+            Particle *particulai = new Particle(limiteP*(drand48()-0.5), limiteP*(drand48()-0.5), limiteV*(drand48()-0.5), limiteV*(drand48()-0.5), masa, radio, i, filename);
             particulai->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
             particulas[i] = particulai;
         }
@@ -86,7 +97,7 @@ int main(int argc, char *argv[]){
         }
 
 
-        outfile << px << ',' << py << endl;
+        //outfile << px << ',' << py << endl;
 
         if(it%iteraciones == 0){
             EndCuadro();
@@ -95,5 +106,8 @@ int main(int argc, char *argv[]){
         it++;
         tiempo += deltaTiempo;
     }
-    outfile.close();
+
+    for (int i = 0; i<numParticulas; i++){
+        particulas[i]->cerrarArchivo();
+    }
 }
