@@ -21,5 +21,6 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 .PHONY: clean
 
 clean:
-	@rm -r $(DATADIR)/*
+	@echo ¿Eliminar la informacion de la carpeta $(DATADIR)? [Y/n]
+	@read line; if [ $$line = "Y" ]; then rm -r $(DATADIR)/* ; fi
 	@rm $(EXE) $(OBJDIR)/*

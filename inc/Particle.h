@@ -9,7 +9,7 @@
 #include <string>
 
 using namespace  std;
-
+//Define los metodos y atributos que tendra la clase Particle.
 class Particle{
     public:
         //En primer lugar, definimos los metodos constructores y destructores
