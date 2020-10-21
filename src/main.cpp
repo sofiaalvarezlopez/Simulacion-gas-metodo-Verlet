@@ -42,6 +42,7 @@ int main(int argc, char *argv[]){
         //particulas[2] = particula3;
     //Si el numero de particulas a generar es diferente de dos, las posiciones y velocidad se generan de manera aleatoria con unos limites.
     }else{
+        //Masa y radio de cada particula
         double masa = 10.0;
         double radio = 4.0;
         //Limites para la posicion y velocidad de la particula.

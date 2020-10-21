@@ -167,7 +167,8 @@ void Particle::fuerzaParticula(Particle &p1, Particle &p2){
 }
 
 //Metodo para mover la particula utilizando el algoritmo de Verlet. Se evoluciona el sistema usando un tiempo y un deltaTiempo determinados para evolucionar el sistema adecuadamente.
-//@param tiempo: tiempo q
+//@param deltaTiempo: evolucion del sistema en un intervalo de tiempo
+//@param iteracion: Numero de la iteracion en la cual se esta
 void Particle::moverParticula(double deltaTiempo, int iteracion){
     //Si estamos en la iteracion 0, la particula no se mueve.
     if(iteracion == 0) return;
