@@ -10,41 +10,38 @@
 #include <ctime>  
 #include <string>
 #include <cstdio>
-
 using namespace  std;
 
 int main(int argc, char *argv[]){
-
+    //Tomamos un tiempo inicial para crear la carpeta de la simulacion actual, donde se almacenan los datos
     auto start = std::chrono::system_clock::now();
-
     std::time_t startTime = std::chrono::system_clock::to_time_t(start);
 
-
+    //Creacion de los directorios necesarios para la simulacion
     string filename = "data/";
     filename.append(ctime(&startTime));
     filename.erase(filename.find_last_not_of(" \n\r\t") + 1);
-
-    //cout << filename.c_str() << endl;
-
     mkdir("data", 0777);
     mkdir(filename.c_str(), 0777);
 
+    //Primer argumento recibido por consola. Corresponde al numero de particulas a simular.
     int numParticulas = std::stoi(argv[1]);
-
+    //Creacion del arreglo, de tamanio numParticulas, donde se almacenan las particulas de la simulacion.
     Particle *particulas[numParticulas];
 
+    //Si se tienen dos particulas, se crea la simulacion con los valores dados en el enunciado.
     if(numParticulas == 2){
         Particle *particula1 = new Particle(-10.0, 4.0, 40.0, 0.0, 10.0, 5.0, 1, filename);
         particula1->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
         Particle *particula2 = new Particle(0.0, 0.0, 0.0, 0.0, 10.0, 5.0, 2, filename);
         particula2->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
-//        Particle *particula3 = new Particle(0.0, 10.0, -1.0, 2.0, 10.0, 5.0);
-//        particula3->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
+        //Particle *particula3 = new Particle(0.0, 10.0, -1.0, 2.0, 10.0, 5.0);
+        //particula3->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
         particulas[0] = particula1;
         particulas[1] = particula2;
-//        particulas[2] = particula3;
+        //particulas[2] = particula3;
+    //
     }else{
-        //cout<<"esta aca panilla"<<endl;
         double masa = 10.0;
         double radio = 4.0;
         double limiteP = 50.0;
