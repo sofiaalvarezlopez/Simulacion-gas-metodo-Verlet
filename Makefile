@@ -1,7 +1,6 @@
 DIR = .
 CXX = g++
 CFLAGS = -std=c++11 -Wall -I$(INCDIR)
-#CFLAGS = -std=c++1z -Wall -I$(INCDIR)
 
 SRCDIR = $(DIR)/src
 INCDIR = $(DIR)/inc
