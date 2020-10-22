@@ -1,15 +1,18 @@
 import os
 import pandas as pd
-import  matplotlib
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
-matplotlib.use('TkAgg')
+#matplotlib.use('TkAgg')
 
 #Directorio donde guardamos los datos capturados
 data_path = './data/'
 #Listamos todos los directorios que hay en la carpeta data_path
 data_directories = os.listdir(data_path)
-data_directories.remove('.DS_Store')
+try:
+    data_directories.remove('.DS_Store')
+except:
+    pass
 #Listamos las carpetas que contienen los datos de las simulaciones 
 print('Las carpetas con archivos de simulaciones que hay en el sistema son: ')
 for i in range(len(data_directories)):
@@ -42,6 +45,16 @@ py_total = particula1['py'] + particula2['py']
 #El tiempo que tarda la simulacion en completarse es de 1 segundo
 tiempo = np.arange(0,10000*0.0001,0.0001)
 
+try:
+    os.mkdir('./images/')
+except:
+    pass
+
+try:
+    os.mkdir('./images/' + selected_path[7:-1])
+except:
+    pass
+
 #Grafica del momento en el eje x. Tomamos hasta 10000 para que sea consistente con el tiempo y corresponda unicamente al primer choque
 plt.figure('Grafica de conservacion de momento en el eje x durante el primer choque', figsize=(7,5))
 plt.plot(tiempo, particula1[0:10000]['px'], 'r', label = 'momento Particula1')
@@ -51,6 +64,7 @@ plt.legend()
 plt.xlabel('Tiempo (s)')
 plt.ylabel(r'$P_x$')
 plt.title('Grafica de conservacion de momento en el eje x durante el primer choque')
+plt.savefig('./images/' + selected_path[7:-1] + '/Conservacion_P_x.png')
 
 #Grafica del momento en el eje y. Tomamos hasta 10000 para que sea consistente con el tiempo y corresponda unicamente al primer choque
 plt.figure('Grafica de conservacion de momento en el eje y durante el primer choque', figsize=(7,5))
@@ -61,6 +75,7 @@ plt.legend(loc=7, bbox_to_anchor=(0.5, 0., 0.5, 0.5))
 plt.xlabel('Tiempo (s)')
 plt.ylabel(r'$P_y$')
 plt.title('Grafica de conservacion de momento en el eje y durante el primer choque')
+plt.savefig('./images/' + selected_path[7:-1] + '/Conservacion_P_y.png')
 
 #Encontramos la energia potencial total
 energiaPotencialTotal = particula1['Ev'] + particula2['Ev']
@@ -78,6 +93,7 @@ plt.legend()
 plt.xlabel('Tiempo (s)')
 plt.ylabel(r'$E$')
 plt.title('Grafica de conservacion de energia durante el primer choque')
+plt.savefig('./images/' + selected_path[7:-1] + '/Conservacion_E_Total.png')
 
 plt.show()
 

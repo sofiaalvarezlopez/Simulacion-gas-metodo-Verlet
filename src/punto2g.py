@@ -3,13 +3,16 @@ import pandas as pd
 import  matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-matplotlib.use('TkAgg')
+#matplotlib.use('TkAgg')
 
 #Directorio donde guardamos los datos capturados
 data_path = './data/'
 #Listamos todos los directorios que hay en la carpeta data_path
 data_directories = os.listdir(data_path)
-data_directories.remove('.DS_Store')
+try:
+    data_directories.remove('.DS_Store')
+except:
+    pass
 #Listamos las carpetas que contienen los datos de las simulaciones 
 print('Las carpetas con archivos de simulaciones que hay en el sistema son: ')
 for i in range(len(data_directories)):
@@ -38,9 +41,19 @@ for i in range(1, num_particulas):
 
 v2 = velocidades.loc[len(velocidades)-10000:]
 media_velocidades = v2.mean()
+try:
+    os.mkdir('./images/')
+except:
+    pass
+
+try:
+    os.mkdir('./images/' + selected_path[7:-1])
+except:
+    pass
 
 plt.figure('Distribucion Velocidades Cuadraticas con v^2', figsize=(7,5))
 plt.hist(media_velocidades, edgecolor='black', bins =15)
+plt.savefig('./images/' + selected_path[7:-1] + '/Dist_V2.png')
 
 cinetica = pd.DataFrame({'Ek': dataParticles[0]['Ek']})
 for i in range(1, num_particulas):
@@ -51,5 +64,6 @@ media_cinetica = cin.mean()
 
 plt.figure('Distribucion Velocidades Cuadraticas usando la energia cinetica E_k', figsize=(7,5))
 plt.hist(media_cinetica, edgecolor='black', bins =15)
+plt.savefig('./images/' + selected_path[7:-1] + '/Dist_V2_Con_Ek.png')
 plt.show()
 
