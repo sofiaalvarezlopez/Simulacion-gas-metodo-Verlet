@@ -52,13 +52,18 @@ except:
     pass
 
 try:
-    os.mkdir('./images/' + selected_path[19:-1])
+    os.mkdir('./images/50Particulas/')
+except:
+    pass
+
+try:
+    os.mkdir('./images/50Particulas' + selected_path[19:-1])
 except:
     pass
 
 plt.figure('Distribucion Velocidades Cuadraticas con v^2', figsize=(7,5))
 plt.hist(media_velocidades, edgecolor='black', bins =15)
-plt.savefig('./images/' + selected_path[19:-1] + '/Dist_V2.png')
+plt.savefig('./images/50Particulas/' + selected_path[19:-1] + '/Dist_V2.png')
 
 cinetica = pd.DataFrame({'Ek': dataParticles[0]['Ek']})
 for i in range(1, num_particulas):
@@ -69,6 +74,6 @@ media_cinetica = cin.mean()
 
 plt.figure('Distribucion Velocidades Cuadraticas usando la energia cinetica E_k', figsize=(7,5))
 plt.hist(media_cinetica, edgecolor='black', bins =15)
-plt.savefig('./images/' + selected_path[19:-1] + '/Dist_V2_Con_Ek.png')
+plt.savefig('./images/50Particulas/' + selected_path[19:-1] + '/Dist_V2_Con_Ek.png')
 plt.show()
 
