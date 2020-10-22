@@ -6,9 +6,14 @@ import numpy as np
 #matplotlib.use('TkAgg')
 
 #Directorio donde guardamos los datos capturados
-data_path = './data/'
+data_path = './data/50Particulas/'
 #Listamos todos los directorios que hay en la carpeta data_path
-data_directories = os.listdir(data_path)
+try:
+    data_directories = os.listdir(data_path)
+except:
+    print("No ha generado datos con 50 moleculas")
+    exit()
+
 try:
     data_directories.remove('.DS_Store')
 except:
@@ -47,13 +52,13 @@ except:
     pass
 
 try:
-    os.mkdir('./images/' + selected_path[7:-1])
+    os.mkdir('./images/' + selected_path[19:-1])
 except:
     pass
 
 plt.figure('Distribucion Velocidades Cuadraticas con v^2', figsize=(7,5))
 plt.hist(media_velocidades, edgecolor='black', bins =15)
-plt.savefig('./images/' + selected_path[7:-1] + '/Dist_V2.png')
+plt.savefig('./images/' + selected_path[19:-1] + '/Dist_V2.png')
 
 cinetica = pd.DataFrame({'Ek': dataParticles[0]['Ek']})
 for i in range(1, num_particulas):
@@ -64,6 +69,6 @@ media_cinetica = cin.mean()
 
 plt.figure('Distribucion Velocidades Cuadraticas usando la energia cinetica E_k', figsize=(7,5))
 plt.hist(media_cinetica, edgecolor='black', bins =15)
-plt.savefig('./images/' + selected_path[7:-1] + '/Dist_V2_Con_Ek.png')
+plt.savefig('./images/' + selected_path[19:-1] + '/Dist_V2_Con_Ek.png')
 plt.show()
 

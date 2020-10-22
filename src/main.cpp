@@ -17,12 +17,6 @@ int main(int argc, char *argv[]){
     auto start = std::chrono::system_clock::now();
     std::time_t startTime = std::chrono::system_clock::to_time_t(start);
 
-    //Creacion de los directorios necesarios para la simulacion
-    string filename = "data/";
-    filename.append(ctime(&startTime));
-    filename.erase(filename.find_last_not_of(" \n\r\t") + 1);
-    mkdir("data", 0777);
-    mkdir(filename.c_str(), 0777);
 
     //Primer argumento recibido por consola. Corresponde al numero de particulas a simular.
     int numParticulas = std::stoi(argv[1]);
@@ -31,6 +25,13 @@ int main(int argc, char *argv[]){
 
     //Si se tienen dos particulas, se crea la simulacion con los valores dados en el enunciado.
     if(numParticulas == 2){
+        //Creacion de los directorios necesarios para la simulacion
+        string filename = "data/2Particulas/";
+        filename.append(ctime(&startTime));
+        filename.erase(filename.find_last_not_of(" \n\r\t") + 1);
+        mkdir("data", 0777);
+        mkdir("data/2Particulas", 0777);
+        mkdir(filename.c_str(), 0777);
         Particle *particula1 = new Particle(-10.0, 4.0, 40.0, 0.0, 10.0, 5.0, 1, filename);
         particula1->asignarLimitesPared(-50.0, 50.0, -50.0, 50.0);
         Particle *particula2 = new Particle(0.0, 0.0, 0.0, 0.0, 10.0, 5.0, 2, filename);
@@ -42,6 +43,16 @@ int main(int argc, char *argv[]){
         //particulas[2] = particula3;
     //Si el numero de particulas a generar es diferente de dos, las posiciones y velocidad se generan de manera aleatoria con unos limites.
     }else{
+        //Creacion de los directorios necesarios para la simulacion
+        string num = to_string(numParticulas);
+        string filename = "data/";
+        filename.append(num);
+        filename.append("Particulas/");
+        mkdir("data", 0777);
+        mkdir(filename.c_str(), 0777);
+        filename.append(ctime(&startTime));
+        filename.erase(filename.find_last_not_of(" \n\r\t") + 1);
+        mkdir(filename.c_str(), 0777);
         //Masa y radio de cada particula
         double masa = 10.0;
         double radio = 4.0;

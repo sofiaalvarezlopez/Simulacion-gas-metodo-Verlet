@@ -6,9 +6,12 @@ import numpy as np
 #matplotlib.use('TkAgg')
 
 #Directorio donde guardamos los datos capturados
-data_path = './data/'
+data_path = './data/2Particulas/'
 #Listamos todos los directorios que hay en la carpeta data_path
-data_directories = os.listdir(data_path)
+try:
+    data_directories = os.listdir(data_path)
+except:
+    print("No ha generado datos con 2 moleculas")
 try:
     data_directories.remove('.DS_Store')
 except:
@@ -51,7 +54,7 @@ except:
     pass
 
 try:
-    os.mkdir('./images/' + selected_path[7:-1])
+    os.mkdir('./images/' + selected_path[19:-1])
 except:
     pass
 
@@ -64,7 +67,7 @@ plt.legend()
 plt.xlabel('Tiempo (s)')
 plt.ylabel(r'$P_x$')
 plt.title('Grafica de conservacion de momento en el eje x durante el primer choque')
-plt.savefig('./images/' + selected_path[7:-1] + '/Conservacion_P_x.png')
+plt.savefig('./images/' + selected_path[19:-1] + '/Conservacion_P_x.png')
 
 #Grafica del momento en el eje y. Tomamos hasta 10000 para que sea consistente con el tiempo y corresponda unicamente al primer choque
 plt.figure('Grafica de conservacion de momento en el eje y durante el primer choque', figsize=(7,5))
@@ -75,7 +78,7 @@ plt.legend(loc=7, bbox_to_anchor=(0.5, 0., 0.5, 0.5))
 plt.xlabel('Tiempo (s)')
 plt.ylabel(r'$P_y$')
 plt.title('Grafica de conservacion de momento en el eje y durante el primer choque')
-plt.savefig('./images/' + selected_path[7:-1] + '/Conservacion_P_y.png')
+plt.savefig('./images/' + selected_path[19:-1] + '/Conservacion_P_y.png')
 
 #Encontramos la energia potencial total
 energiaPotencialTotal = particula1['Ev'] + particula2['Ev']
@@ -93,7 +96,7 @@ plt.legend()
 plt.xlabel('Tiempo (s)')
 plt.ylabel(r'$E$')
 plt.title('Grafica de conservacion de energia durante el primer choque')
-plt.savefig('./images/' + selected_path[7:-1] + '/Conservacion_E_Total.png')
+plt.savefig('./images/' + selected_path[19:-1] + '/Conservacion_E_Total.png')
 
 plt.show()
 
