@@ -46,7 +46,7 @@ cinetica = pd.DataFrame({'Ek': dataParticles[0]['Ek']})
 for i in range(1, num_particulas):
     cinetica['Ek'+str(i+1)] = dataParticles[i]['Ek']
 
-cin = cinetica.loc[len(velocidades)-10000:]
+cin = cinetica.loc[len(cinetica)-10000:]
 media_cinetica = cin.mean()
 
 plt.figure('Distribucion Velocidades Cuadraticas usando la energia cinetica E_k', figsize=(7,5))
