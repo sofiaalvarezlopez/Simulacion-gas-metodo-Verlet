@@ -1,4 +1,8 @@
 #!/bin/bash
+echo ----------------------------------------------------------------
+echo ------------ Simulacion de un sistema de particulas ------------
+echo ---------Juan Daniel Castrellon y Maria Sofia Alvarez ----------
+echo ----------------------------------------------------------------
 echo Escriba el numero de la opcion que desea correr [e.g. 1]
 echo 1. make
 echo 2. make clean
@@ -17,6 +21,7 @@ read line;
              echo Escriba el tiempo que desea correr la simulacion
              read tiempo
              ./Simulacion "$particulas" "$tiempo" | gnuplot
+             echo ------------ Programa ejecutado exitosamente ------------
     elif [ "$line"  -eq 4 ]; 
         then python3 ./src/punto1d.py
     elif [ "$line" -eq 5 ];
@@ -24,4 +29,5 @@ read line;
     else 
         echo Opcion no disponible;
     fi
+
 
